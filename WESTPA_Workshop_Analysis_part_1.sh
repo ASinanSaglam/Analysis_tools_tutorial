@@ -1,22 +1,18 @@
 # Created by: Ali Sinan Saglam
 # For 2015 WESTPA Workshop, analysis tools 
 
-### Variables ### 
-# Set all your variables here if you didn't go with 
-# the default settings 
-
-#H5FILE='west.h5'
-H5FILE=/home/boltzmann/PROJECTS/VILLIN/analyze_RMSD/RMSD_OF_HFBIC_RES/west.h5
-WESTBIN=/home/boltzmann/apps/westpa/bin
+module purge
+module load queue
+module load westpa/1.0-gcc-4.8.2
+module load westpa/anaconda-1.9.1-gcc-4.8.2
 
 # Note:
 # For every tool I suggest using -h option if you get stuck or want to learn
-# more, most of the tools are well documented! 
+# more, tools are well documented! 
 
 ### Part 1: Free Energy Landscape ### 
 
-
-# Histogramming tool 
+# Histogramming tool: w_pdist
 
 # w_pdist is the tool used in order to generate histograms 
 # for different datasets (including but not limited to the progress coordinate). 
@@ -31,7 +27,12 @@ WESTBIN=/home/boltzmann/apps/westpa/bin
 
 # By default the tool will histogram the progress coordinate with the bins 
 # as defined in the system.py (or west.cfg) files. 
-$WESTBIN/w_pdist -W $H5FILE -o pdist.h5
+
+# A very useful thing to know about the w_pdist command is the option to pull in auxiliary datasets 
+# and being able to histogram those. This way you can keep track of auxiliary data during your simulation
+# This is done by defining a python function and supplying the function to the option --construct-dataset
+# We will also change the binning as defined in the system.py and instead bin the auxiliary dataset 
+w_pdist -W ../west.h5 --construct-dataset assignment.pull_data -o pdist.h5 -b 200
 
 # Plotting the histograms
 # 1D plotting and basic plotting controls
@@ -45,31 +46,19 @@ $WESTBIN/w_pdist -W $H5FILE -o pdist.h5
 #                         [--last-iter N_ITER]
 #                         input [DIMENSION] [ADDTLDIM]
 
-# 1D average
-# The following command will produce a png that plots the free energy landscape of the 
+# 1D average plots
+# The following command will produce a pdf that plots the free energy landscape of the 
 # first dimension of the progress coordinate and sets the y-axis limit to 10kT. 
-$WESTBIN/plothist average -o 1d_average.png --range 0,10 --postprocess-function plotting.avg_1d pdist.h5 0
+plothist average -o 1d_average.pdf --range 0,10 --postprocess-function plotting.avg_1d pdist.h5 0
 
-# 1D evolution
-# The following command will produce a png that plots the free energy landscape of the 
+# 1D evolution plots
+# The following command will produce a pdf that plots the free energy landscape of the 
 # first dimension of the progress coordinate as a function of WE iteration and sets the color bar to 10kT.
-$WESTBIN/plothist evolution -o 1d_evolution.png --range 0,10 --postprocess-function plotting.evo_1d pdist.h5 0
+plothist evolution -o 1d_evolution.pdf --range 0,10 --postprocess-function plotting.evo_1d pdist.h5 0
 
-# 2D plotting and pulling in auxiliary data collected 
+# 2D free energy surface plotting 
 
 # Since we have the progress coordinate already histogrammed we can plot the two dimensions 
 # of the progress coordinate. This next command wiill produce a color map of the free energy
 # as a function of the two progress coordinates. 
-$WESTBIN/plothist average -o 2d_average.png --range 0,10 --postprocess-function plotting.avg_2d pdist.h5 0 1 
-
-# A very useful thing to know about the w_pdist command is the option to pull in auxiliary datasets 
-# and being able to histogram those. This way you can keep track of auxiliary data during your simulation
-# This is done by defining a python function and supplying the function to the option --construct-dataset
-# We will also change the binning as defined in the system.py and instead bin the auxiliary dataset 
-
-# First we need to histogram the auxiliary data
-$WESTBIN/w_pdist -W $H5FILE -o aux_pdist.h5 --construct-dataset assignment.pull_data  -b 200 --first-iter 800
-
-# Now we can plot the free energy landscape as a function of the first dimension of the progress coordinate 
-# and the auxiliary dataset.
-$WESTBIN/plothist average -o 2d_aux_average.png --first-iter 800 --range 0,10 --postprocess-function plotting.avg_aux_2d aux_pdist.h5 0 1
+plothist average -o 2d_average.pdf --range 0,10 --postprocess-function plotting.avg_2d pdist.h5 0 1 

@@ -1,10 +1,15 @@
-import numpy as np
+import numpy 
 
 def pull_data(n_iter, iter_group):
-    import h5py 
-    rmsd_file = h5py.File('/home/boltzmann/PROJECTS/VILLIN/analyze_RMSD/RMSD_OF_HFBIC_RES/RMSDS_800_1000.h5')
-    rmsd_data = rmsd_file['iterations/iter_%08d/rmsd_all_hphc'%(n_iter)][...]
+    '''
+    This function reshapes the progress coordinate and 
+    auxiliary data for each iteration and retuns it to
+    the tool.
+    '''
+
+    auxdata = iter_group['auxdata']['end_to_end_dist'][...]
+    pcoord  = iter_group['pcoord'][:,:,0]
     
-    data = np.dstack( (iter_group['auxdata/mdist_1'][...], rmsd_data) )
+    data = numpy.dstack( (pcoord, auxdata) )
 
     return data

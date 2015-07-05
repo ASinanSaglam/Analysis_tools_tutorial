@@ -1,14 +1,6 @@
 # Created by: Ali Sinan Saglam
 # For 2015 WESTPA Workshop, on analysis tools 
 
-### Variables ### 
-# Set all your variables here if you didn't go with 
-# the default settings 
-H5FILE='west.h5'
-BINFILE='BINS.yaml'
-STATEFILE='STATES.yaml'
-
-
 ### Part 2: Rate constant calculations ### 
 
 # Assingment tool
@@ -24,7 +16,7 @@ STATEFILE='STATES.yaml'
 #                [--serial | --parallel | --work-manager WORK_MANAGER]
 #                [--n-workers N_WORKERS]
 
-w_assign -W --bins-from-file --states-from-file -o 
+w_assign -W ../west.h5 --bins-from-file BINS --states-from-file STATES -o assign.h5
 
 # Kinetics calculation tool
 # w_kinetics
@@ -33,11 +25,10 @@ w_assign -W --bins-from-file --states-from-file -o
 #                        [--last-iter N_ITER] [-a ASSIGNMENTS] [-o OUTPUT]
 #                        [--no-compression]
 
-w_kinetics -W -a --first-iter --last-iter -o
+w_kinetics trace -W ../west.h5 -a assign.h5 -o kinetics.h5
 
 # Kinetic averaging tool
 # w_kinavg 
-
 
 # usage: w_kinavg trace [-h] [-W WEST_H5FILE] [--first-iter N_ITER]
 #                      [--last-iter N_ITER] [--step-iter STEP] [-a ASSIGNMENTS]
@@ -46,4 +37,4 @@ w_kinetics -W -a --first-iter --last-iter -o
 #                      [-e {cumulative,blocked,none}]
 #                      [--window-frac WINDOW_FRAC]
 
-w_kinavg -W --first-iter --last-iter -k -o 
+w_kinavg trace -W ../west.h5 -k kinetics.h5 -o kinavg.h5 | tee kinavg.txt

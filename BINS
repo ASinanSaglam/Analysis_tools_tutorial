@@ -1,4 +1,4 @@
 ---
 bins:
     type: RectilinearBinMapper
-    boundaries: [[0,3,10.5,13.5,16.5,'inf'],[0.0, 1.96, 3.37, 6.45, 11.0, 14.0, 20.0, inf]]
+    boundaries: [[0.0, 0.2, 15.0, inf],[0.0, inf]]

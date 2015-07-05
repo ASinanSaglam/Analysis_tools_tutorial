@@ -8,24 +8,18 @@ def avg_1d(hist, midpoints, binbounds):
     import matplotlib.pyplot as plt
 
     # Now we are going to change the title, add axis labels
-    plt.title('TEST TITLE')
-    plt.xlabel('X AXIS')
+    plt.title('Free energy as a function of progress coordinate RMSD')
+    plt.xlabel('Progress coordinate RMSD')
     plt.ylabel('Free energy surface (kT)')
 
 def evo_1d(hist, midpoints, binbounds):
     import matplotlib.pyplot as plt
-    plt.title('TEST TITLE')
-    plt.xlabel('X AXIS')
+    plt.title('Evolution of progress coordinate RMSD')
+    plt.xlabel('Progress coordinate RMSD')
     plt.ylabel('WE Iteration')
 
 def avg_2d(hist, midpoints, binbounds):
     import matplotlib.pyplot as plt
-    plt.title('TEST TITLE')
-    plt.xlabel('X AXIS')
-    plt.ylabel('Y AXIS')
-
-def avg_aux_2d(hist, midpoints, binbounds):
-    import matplotlib.pyplot as plt
-    plt.title('TEST TITLE')
-    plt.xlabel('X AXIS')
-    plt.ylabel('Y AXIS')
+    plt.title('Free energy as a function of RMSD and end to end distance')
+    plt.xlabel('Progress coordinate RMSD')
+    plt.ylabel('End to end distance')
