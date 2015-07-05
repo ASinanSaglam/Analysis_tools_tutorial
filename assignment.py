@@ -13,3 +13,16 @@ def pull_data(n_iter, iter_group):
     data = numpy.dstack( (pcoord, auxdata) )
 
     return data
+
+def pull_data_assign(n_iter, iter_group):
+    '''
+    This function reshapes the progress coordinate and 
+    auxiliary data for each iteration and retuns it to
+    the tool.
+    '''
+
+    pcoord  = iter_group['pcoord'][:,:,0]
+    
+    data = pcoord[:,:,numpy.newaxis]
+
+    return data

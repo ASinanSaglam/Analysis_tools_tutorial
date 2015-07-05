@@ -16,7 +16,7 @@
 #                [--serial | --parallel | --work-manager WORK_MANAGER]
 #                [--n-workers N_WORKERS]
 
-w_assign -W ../west.h5 --bins-from-file BINS --states-from-file STATES -o assign.h5
+w_assign -W ../west.h5 --bins-from-file BINS --states-from-file STATES -o assign.h5 --construct-dataset assign.pull_data_assign
 
 # Kinetics calculation tool
 # w_kinetics
