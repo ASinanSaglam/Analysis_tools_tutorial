@@ -1,6 +1,13 @@
 # Created by: Ali Sinan Saglam
 # For 2015 WESTPA Workshop, on analysis tools 
 
+# Setup environment
+# Note that this is for the Frank cluster.
+module purge
+module load queue
+module load westpa/1.0-gcc-4.8.2
+module load westpa/anaconda-1.9.1-gcc-4.8.2
+
 ### Part 2: Rate constant calculations ### 
 
 # Assingment tool
