@@ -44,4 +44,12 @@ w_kinetics trace -W ../west.h5 -a assign.h5 -o kinetics.h5
 #                      [-e {cumulative,blocked,none}]
 #                      [--window-frac WINDOW_FRAC]
 
-w_kinavg trace -W ../west.h5 -k kinetics.h5 -o kinavg.h5 | tee kinavg.txt
+w_kinavg trace -W ../west.h5 -a assign.h5 -k kinetics.h5 -o kinavg.h5 | tee kinavg.txt
+
+
+# Now defining the state from arbitrary data sets
+w_assign -W ../west.h5 --bins-from-file BINS_AUX --states-from-file STATES_AUX -o assign_aux.h5 --construct-dataset assignment.pull_data
+
+w_kinetics trace -W ../west.h5 -a assign_aux.h5 -o kinetics_aux.h5
+
+w_kinavg trace -W ../west.h5 -a assign_aux.h5 -k kinetics_aux.h5 -o kinavg_aux.h5 | tee kinavg_aux.txt
