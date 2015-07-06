@@ -1,9 +1,9 @@
 ---
 states:
-  - label: b
+  - label: bound
     coords:
-      - [1.0, 10.0]
+      - [1.0]
 
-  - label: a
+  - label: unbound
     coords:
-      - [16.0, 10.0]
+      - [16.0]

@@ -1,9 +1,9 @@
 ---
 states:
-  - label: b
+  - label: bound_aux 
     coords:
       - [1.0, 21.0]
 
-  - label: a
+  - label: unbound_aux
     coords:
       - [16.0, 31.0]
