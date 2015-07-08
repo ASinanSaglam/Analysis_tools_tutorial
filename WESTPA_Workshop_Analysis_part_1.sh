@@ -32,7 +32,7 @@ module load westpa/anaconda-1.9.1-gcc-4.8.2
 # and being able to histogram those. This way you can keep track of auxiliary data during your simulation
 # This is done by defining a python function and supplying the function to the option --construct-dataset
 # We will also change the binning as defined in the system.py and instead bin the auxiliary dataset 
-w_pdist -W ../west.h5 --construct-dataset assignment.pull_data -o pdist.h5 -b 200
+w_pdist -W west.h5 --construct-dataset assignment.pull_data -o pdist.h5 -b 200
 
 # Plotting the histograms
 # 1D plotting and basic plotting controls
@@ -47,18 +47,18 @@ w_pdist -W ../west.h5 --construct-dataset assignment.pull_data -o pdist.h5 -b 20
 #                         input [DIMENSION] [ADDTLDIM]
 
 # 1D average plots
-# The following command will produce a pdf that plots the free energy landscape of the 
+# The following command will produce a png that plots the free energy landscape of the 
 # first dimension of the progress coordinate and sets the y-axis limit to 10kT. 
-plothist average -o 1d_average.pdf --range 0,10 --postprocess-function plotting.avg_1d pdist.h5 0
+plothist average -o 1d_average.png --range 0,10 --postprocess-function plotting.avg_1d pdist.h5 0
 
 # 1D evolution plots
-# The following command will produce a pdf that plots the free energy landscape of the 
+# The following command will produce a png that plots the free energy landscape of the 
 # first dimension of the progress coordinate as a function of WE iteration and sets the color bar to 10kT.
-plothist evolution -o 1d_evolution.pdf --range 0,10 --postprocess-function plotting.evo_1d pdist.h5 0
+plothist evolution -o 1d_evolution.png --range 0,10 --postprocess-function plotting.evo_1d pdist.h5 0
 
 # 2D free energy surface plotting 
 
 # Since we have the progress coordinate already histogrammed we can plot the two dimensions 
 # of the progress coordinate. This next command wiill produce a color map of the free energy
 # as a function of the two progress coordinates. 
-plothist average -o 2d_average.pdf --range 0,10 --postprocess-function plotting.avg_2d pdist.h5 0 1 
+plothist average -o 2d_average.png --range 0,10 --postprocess-function plotting.avg_2d pdist.h5 0 1 
