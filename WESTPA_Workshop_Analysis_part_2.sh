@@ -23,7 +23,7 @@ module load westpa/anaconda-1.9.1-gcc-4.8.2
 #                [--serial | --parallel | --work-manager WORK_MANAGER]
 #                [--n-workers N_WORKERS]
 
-w_assign -W ../west.h5 --bins-from-file BINS --states-from-file STATES -o assign.h5 --construct-dataset assignment.pull_data_assign
+w_assign -W west.h5 --bins-from-file BINS --states-from-file STATES -o assign.h5 --construct-dataset assignment.pull_data_assign
 
 # Kinetics calculation tool
 # w_kinetics
@@ -32,7 +32,7 @@ w_assign -W ../west.h5 --bins-from-file BINS --states-from-file STATES -o assign
 #                        [--last-iter N_ITER] [-a ASSIGNMENTS] [-o OUTPUT]
 #                        [--no-compression]
 
-w_kinetics trace -W ../west.h5 -a assign.h5 -o kinetics.h5
+w_kinetics trace -W west.h5 -a assign.h5 -o kinetics.h5
 
 # Kinetic averaging tool
 # w_kinavg 
@@ -44,7 +44,7 @@ w_kinetics trace -W ../west.h5 -a assign.h5 -o kinetics.h5
 #                      [-e {cumulative,blocked,none}]
 #                      [--window-frac WINDOW_FRAC]
 
-w_kinavg trace -W ../west.h5 -a assign.h5 -k kinetics.h5 -o kinavg.h5 | tee kinavg.txt
+w_kinavg trace -W west.h5 -a assign.h5 -k kinetics.h5 -o kinavg.h5 | tee kinavg.txt
 
 
 # Now defining the state from arbitrary data sets
@@ -52,8 +52,8 @@ w_kinavg trace -W ../west.h5 -a assign.h5 -k kinetics.h5 -o kinavg.h5 | tee kina
 # as defined in BINS_AUX and with states as defined in STATES_AUX which is then
 # used to calculate rate constants.
 
-w_assign -W ../west.h5 --bins-from-file BINS_AUX --states-from-file STATES_AUX -o assign_aux.h5 --construct-dataset assignment.pull_data
+w_assign -W west.h5 --bins-from-file BINS_AUX --states-from-file STATES_AUX -o assign_aux.h5 --construct-dataset assignment.pull_data
 
-w_kinetics trace -W ../west.h5 -a assign_aux.h5 -o kinetics_aux.h5
+w_kinetics trace -W west.h5 -a assign_aux.h5 -o kinetics_aux.h5
 
-w_kinavg trace -W ../west.h5 -a assign_aux.h5 -k kinetics_aux.h5 -o kinavg_aux.h5 | tee kinavg_aux.txt
+w_kinavg trace -W west.h5 -a assign_aux.h5 -k kinetics_aux.h5 -o kinavg_aux.h5 | tee kinavg_aux.txt
