@@ -41,4 +41,4 @@ w_trace -W west.h5 120:10
 # This particular part uses GROMACS tool trjcat to stitch together the 
 # trajectory 
 cd traced_traj
-trjcat -f *xtc -o full_traj.xtc
+trjcat -f *xtc -o full_traj.xtc -cat
