@@ -2,8 +2,8 @@
 states:
   - label: bound_aux 
     coords:
-      - [1.0, 21.0]
+      - [1.0, 25.0]
 
   - label: unbound_aux
     coords:
-      - [16.0, 31.0]
+      - [19.0, 31.0]
