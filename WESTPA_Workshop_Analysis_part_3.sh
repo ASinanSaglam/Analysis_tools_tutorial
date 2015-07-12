@@ -29,13 +29,13 @@ module load gromacs
 if [[ -e trajs.h5 ]];then
   rm trajs.h5
 fi
-w_trace -W west.h5 120:10
+w_trace -W west.h5 77:399
 
 # A sample bash script to pull files from the walker tree (traj_segs)
 # I also pull the initial state coordinate for convenience if you would
 # like to take a look at the trajectory in your favorite visualization
 # software, it's called init.gro
-./trj_trace.sh traj_120_10_trace.txt
+./trj_trace.sh traj_77_399_trace.txt
 
 # Now stitch together the xtc files
 # This particular part uses GROMACS tool trjcat to stitch together the 
