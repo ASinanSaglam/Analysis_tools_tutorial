@@ -1,9 +1,9 @@
 ---
 states:
-  - label: bound
+  - label: native
     coords:
       - [1.0]
 
-  - label: unbound
+  - label: unfold
     coords:
       - [7.0]

@@ -1,9 +1,9 @@
 ---
 states:
-  - label: bound_aux 
+  - label: native_aux 
     coords:
       - [1.0, 25.0]
 
-  - label: unbound_aux
+  - label: unfold_aux
     coords:
       - [19.0, 31.0]
